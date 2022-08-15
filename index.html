@@ -5,8 +5,54 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Météo</title>
+        <link rel="stylesheet" href="style/style.css" >
     </head>
     <body>
+        <div class="container">
+            <h1>Application Météo</h1>
+
+            <div class="current-weather">
+                <div class="current-weather_ico">
+                    <img src="style/01d.svg" >
+                </div>
+                <div class="current-weather_txt">
+                    <p class="current-weather_temp">{{ T° }}</p>
+                    <p class="current-weather_description">
+                        {{ description }}<br>
+                        Température ressentie: {{ T° }}
+                    </p>
+                </div>                
+            </div>
+
+            <ul class="hourly-weather">
+                <li>
+                    {{ H }}<br>
+                    <img src="style/01d.svg" ><br>
+                    {{T°}}
+                </li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>                
+            </ul>
+
+            <ul class="daily-weather">
+                <li>
+                    {{ Day }}<br>
+                    <img src="style/01d.svg" ><br>
+                    {{Tmax / Tmin }}
+                </li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+
         <script src="js/app.js"></script>    
     </body>
 </html>
