@@ -36,3 +36,7 @@ li, .current-weather{
     text-align: center;
     margin: auto;
 }
+
+.error-box{
+    color: red;
+}
