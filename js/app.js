@@ -15,7 +15,7 @@ const API_PARAM = {
 const ERROR_BOX = document.querySelector(".error-box");
 const LOADER = document.querySelector(".loader");
 
-LOADER.textContent = 'Obtention de votre localisation en cours...'
+LOADER.textContent = 'Obtention de votre localisation en cours...';
 
 if(navigator.geolocation){
     navigator.geolocation.getCurrentPosition(positionSuccess, positionError);
@@ -29,6 +29,7 @@ function positionSuccess(pos){
     API_PARAM.lat = pos.coords.latitude;
     API_PARAM.lon = pos.coords.longitude;
     console.log(API_PARAM.lat, API_PARAM.lon);
+    weatherApiCall();
 }
 
 function positionError(err){
@@ -47,4 +48,28 @@ function positionError(err){
             ERROR_BOX.textContent = "Oups... Une erreur est survenue";
             break;
     }
+}
+
+
+function weatherApiCall(){
+    LOADER.textContent = 'Récupération des données météo en cours...';
+
+    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${API_PARAM.lat}&lon=${API_PARAM.lon}&lang=${API_PARAM.lang}&exclude=${API_PARAM.exclude}&appid=${API_PARAM.appid}`)
+        .then(res => {
+            if(res.ok){
+                res.json().then(res => {
+                    LOADER.textContent = '';
+                    console.log(res);
+                });
+            }
+            else {
+                LOADER.textContent = '';
+                ERROR_BOX.textContent = `Oups... Erreur ${res.status}.`;
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            LOADER.textContent = '';
+            ERROR_BOX.textContent = "Oups... Une erreur est survenue";
+        });
 }
