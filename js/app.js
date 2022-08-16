@@ -13,6 +13,9 @@ const API_PARAM = {
 }
 
 const ERROR_BOX = document.querySelector(".error-box");
+const LOADER = document.querySelector(".loader");
+
+LOADER.textContent = 'Obtention de votre localisation en cours...'
 
 if(navigator.geolocation){
     navigator.geolocation.getCurrentPosition(positionSuccess, positionError);
@@ -22,12 +25,14 @@ else{
 }
 
 function positionSuccess(pos){
+    LOADER.textContent = '';
     API_PARAM.lat = pos.coords.latitude;
     API_PARAM.lon = pos.coords.longitude;
-    console.log(API_PARAM.lat, API_PARAM.lon)
+    console.log(API_PARAM.lat, API_PARAM.lon);
 }
 
 function positionError(err){
+    LOADER.textContent = '';
     switch(err.code){
         case 1:
             ERROR_BOX.textContent = "Vous n'avez pas autorisé la géolocalisation.";
