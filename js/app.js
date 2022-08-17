@@ -29,7 +29,6 @@ function positionSuccess(pos){
     LOADER.textContent = '';
     API_PARAM.lat = pos.coords.latitude;
     API_PARAM.lon = pos.coords.longitude;
-    console.log(API_PARAM.lat, API_PARAM.lon);
     weatherApiCall();
 }
 
@@ -60,7 +59,6 @@ function weatherApiCall(){
             if(res.ok){
                 res.json().then(data => {
                     LOADER.textContent = '';
-                    console.log(data);
                     showCurrentWeather(data.current);
                     handleHourlyWeather(data.hourly);
                     handleDailyWeather(data.daily);
@@ -85,7 +83,6 @@ function showCurrentWeather(data){
         icon: data.weather[0].icon,
         description: data.weather[0].description
     }
-    console.log(currentWeather);
     document.querySelector(".current-weather_ico").innerHTML = `<img src="style/img/${currentWeather.icon}.svg" alt="icone météo">`;
     document.querySelector(".current-weather_temp").textContent = currentWeather.temp;
     document.querySelector(".current-weather_description").innerHTML = `${currentWeather.description }<br>Température ressentie: ${currentWeather.feelsLike}`;
@@ -94,9 +91,7 @@ function showCurrentWeather(data){
 const HOURLY_WEATHER = document.querySelector(".hourly-weather");
 
 function handleHourlyWeather(data){
-    console.log(data);
     for(let i = 0; i < 7; i++){
-        console.log(data[i]);
         let li = document.createElement('li');
         li.innerHTML = `
             ${new Date(data[i].dt*1000).getHours()}H<br>
@@ -110,9 +105,7 @@ const DAILY_WEATHER = document.querySelector(".daily-weather");
 const DAY_NAME = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
 
 function handleDailyWeather(data){
-    console.log(data);
     for(let i = 0; i < 7; i++){
-        console.log(data[i]);
         let day = DAY_NAME[new Date(data[i].dt*1000).getDay()];
         let li = document.createElement('li');
         li.innerHTML = `
