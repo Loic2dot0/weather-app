@@ -77,14 +77,19 @@ function weatherApiCall(){
 }
 
 function showCurrentWeather(data){
+    let today = new Date().toLocaleString("fr-FR",{year: 'numeric', month: 'long', day: 'numeric'});
+    let weekday =  new Date().toLocaleString("fr-FR",{weekday: 'long'});
     let currentWeather = {
         temp: `${Math.round(data.temp)}°`,
         feelsLike: `${Math.round(data.feels_like)}°`,
         icon: data.weather[0].icon,
         description: data.weather[0].description
     }
-    document.querySelector(".current-weather_ico").innerHTML = `<img src="style/img/${currentWeather.icon}.svg" alt="icone météo">`;
+
+    document.querySelector(".current-weather_lite img").setAttribute("src", `style/img/${currentWeather.icon}.svg`);
     document.querySelector(".current-weather_temp").textContent = currentWeather.temp;
+    document.querySelector(".current-weather_weekday").textContent = weekday;
+    document.querySelector(".current-weather_today").textContent = today;
     document.querySelector(".current-weather_description").innerHTML = `${currentWeather.description }<br>Température ressentie: ${currentWeather.feelsLike}`;
 }
 
@@ -94,7 +99,7 @@ function handleHourlyWeather(data){
     for(let i = 0; i < 7; i++){
         let li = document.createElement('li');
         li.innerHTML = `
-            ${new Date(data[i].dt*1000).getHours()}H<br>
+            ${new Date(data[i].dt*1000).getHours()}h<br>
             <img src="style/img/${data[i].weather[0].icon}.svg" ><br>
             ${Math.round(data[i].temp)}°`;
         HOURLY_WEATHER.appendChild(li);
