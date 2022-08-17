@@ -62,6 +62,7 @@ function weatherApiCall(){
                     LOADER.textContent = '';
                     console.log(data);
                     showCurrentWeather(data.current);
+                    handleHourlyWeather(data.hourly);
                 });
             }
             else {
@@ -87,4 +88,19 @@ function showCurrentWeather(data){
     document.querySelector(".current-weather_ico").innerHTML = `<img src="style/img/${currentWeather.icon}.svg" alt="icone météo">`;
     document.querySelector(".current-weather_temp").textContent = currentWeather.temp;
     document.querySelector(".current-weather_description").innerHTML = `${currentWeather.description }<br>Température ressentie: ${currentWeather.feelsLike}`;
+}
+
+const HOURLY_WEATHER = document.querySelector(".hourly-weather");
+
+function handleHourlyWeather(data){
+    console.log(data);
+    for(let i = 0; i < 7; i++){
+        console.log(data[i]);
+        let li = document.createElement('li');
+        li.innerHTML = `
+            ${new Date(data[i].dt*1000).getHours()}H<br>
+            <img src="style/img/${data[i].weather[0].icon}.svg" ><br>
+            ${Math.round(data[i].temp)}°`;
+        HOURLY_WEATHER.appendChild(li);
+    }
 }
