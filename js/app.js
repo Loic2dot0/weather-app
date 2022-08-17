@@ -63,6 +63,7 @@ function weatherApiCall(){
                     console.log(data);
                     showCurrentWeather(data.current);
                     handleHourlyWeather(data.hourly);
+                    handleDailyWeather(data.daily);
                 });
             }
             else {
@@ -102,5 +103,22 @@ function handleHourlyWeather(data){
             <img src="style/img/${data[i].weather[0].icon}.svg" ><br>
             ${Math.round(data[i].temp)}°`;
         HOURLY_WEATHER.appendChild(li);
+    }
+}
+
+const DAILY_WEATHER = document.querySelector(".daily-weather");
+const DAY_NAME = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+
+function handleDailyWeather(data){
+    console.log(data);
+    for(let i = 0; i < 7; i++){
+        console.log(data[i]);
+        let day = DAY_NAME[new Date(data[i].dt*1000).getDay()];
+        let li = document.createElement('li');
+        li.innerHTML = `
+            ${day}<br>
+            <img src="style/img/${data[i].weather[0].icon}.svg" ><br>
+            ${Math.round(data[i].temp.day)}°`;
+            DAILY_WEATHER.appendChild(li);
     }
 }
