@@ -7,7 +7,8 @@
 const API_PARAM = {
     appid : '', // Your API Key
     lang: 'fr', // langage
-    exclude: 'minutely', //exclude some parts ot the weather data (current,minutely,hourly,daily,alerts)
+    exclude: 'minutely', //exclude some parts of the weather data (current,minutely,hourly,daily,alerts)
+    units: 'metric', // standard, metric or imperial
     lat: 0, // default latitude
     lon: 0 // default longitude
 }
@@ -54,7 +55,7 @@ function positionError(err){
 function weatherApiCall(){
     LOADER.textContent = 'Récupération des données météo en cours...';
 
-    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${API_PARAM.lat}&lon=${API_PARAM.lon}&lang=${API_PARAM.lang}&exclude=${API_PARAM.exclude}&appid=${API_PARAM.appid}`)
+    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${API_PARAM.lat}&lon=${API_PARAM.lon}&lang=${API_PARAM.lang}&units=${API_PARAM.units}&exclude=${API_PARAM.exclude}&appid=${API_PARAM.appid}`)
         .then(res => {
             if(res.ok){
                 res.json().then(res => {
