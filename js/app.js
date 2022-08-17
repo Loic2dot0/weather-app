@@ -58,9 +58,10 @@ function weatherApiCall(){
     fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${API_PARAM.lat}&lon=${API_PARAM.lon}&lang=${API_PARAM.lang}&units=${API_PARAM.units}&exclude=${API_PARAM.exclude}&appid=${API_PARAM.appid}`)
         .then(res => {
             if(res.ok){
-                res.json().then(res => {
+                res.json().then(data => {
                     LOADER.textContent = '';
-                    console.log(res);
+                    console.log(data);
+                    showCurrentWeather(data.current);
                 });
             }
             else {
@@ -73,4 +74,17 @@ function weatherApiCall(){
             LOADER.textContent = '';
             ERROR_BOX.textContent = "Oups... Une erreur est survenue";
         });
+}
+
+function showCurrentWeather(data){
+    let currentWeather = {
+        temp: `${Math.round(data.temp)}°`,
+        feelsLike: `${Math.round(data.feels_like)}°`,
+        icon: data.weather[0].icon,
+        description: data.weather[0].description
+    }
+    console.log(currentWeather);
+    document.querySelector(".current-weather_ico").innerHTML = `<img src="style/img/${currentWeather.icon}.svg" alt="icone météo">`;
+    document.querySelector(".current-weather_temp").textContent = currentWeather.temp;
+    document.querySelector(".current-weather_description").innerHTML = `${currentWeather.description }<br>Température ressentie: ${currentWeather.feelsLike}`;
 }
