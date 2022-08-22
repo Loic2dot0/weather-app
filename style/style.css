@@ -155,8 +155,30 @@ footer a:hover{
 
 @media screen and (min-width: 768px){
     html{
-        font-size: 150%;
+        font-size: 110%;
     }
+
+    .current-weather{
+        flex-direction: row;
+        justify-content: space-evenly
+    }
+
+    .current-weather_lite{
+        flex-direction: column;
+        flex: initial;
+    }
+
+    .current-weather_lite img{
+        object-fit: contain;
+        height: 100%;
+        max-width: 50%;
+        scale: 1.4;
+    }
+     
+    .current-weather_temp{
+        font-size: 5rem;
+        font-weight: bold;    
+    } 
 
     li:nth-child(1n + 6){
         display: initial;
@@ -164,6 +186,30 @@ footer a:hover{
 
     li:not(:last-child){
         border-right: solid 1px #AAA;
+    }
+}
+
+@media screen and (min-width: 1300px){
+    html{
+        font-size: 125%;
+    }
+}
+
+@media screen and (min-width: 1920px){
+    html{
+        font-size: 150%;
+    }
+}
+
+@media screen and (min-width: 2560px){
+    html{
+        font-size: 200%;
+    }
+}
+
+@media screen and (min-width: 3840px){
+    html{
+        font-size: 300%;
     }
 }
 
