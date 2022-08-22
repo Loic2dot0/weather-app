@@ -10,33 +10,152 @@ html{
 
 body{
     background-color: #333;
-    height: 100vh;
-    font-family: sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
+    letter-spacing: 1px;
 }
 
 .container{
     background: linear-gradient(45deg, #73b5ef, #c5d8e8);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
 
 h1{
     text-align: center;
     background-color: #fff;
-    padding: 1rem;
+    font-weight: normal;
+    font-size: 2.5rem;
+    line-height: clamp(80px, 12vh, 250px);
+}
+
+h1 span{
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.loader{
+    text-align: center;
     font-size: 1.5rem;
+    
 }
 
 ul{
     background-color: #fff;
     display: flex;
     list-style: none;
+    align-items: center;
 }
 
-li, .current-weather{
-    padding: 10px;
+li{
     text-align: center;
-    margin: auto;
+    width: 100%;
+    padding: clamp(5px, 2vw, 20px) 0;
+}
+
+li:not(:nth-child(1n + 5)){
+    border-right: solid 1px #AAA;
+}
+
+li:nth-child(1n + 6){
+    display: none;
 }
 
 .error-box{
     color: red;
+}
+
+.current-weather{
+    padding: 10px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.current-weather_lite{
+   display: flex;
+   justify-content: space-evenly;
+   align-items: center;
+   flex: 1;
+}
+
+.current-weather_lite img{
+    object-fit: contain;
+    height: 100%;
+    max-width: 50%;
+    scale: 1.4;
+}
+
+.current-weather_temp{
+    font-size: 5rem;
+    font-weight: bold;    
+}
+
+.current-weather_txt{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 1.8rem;
+}
+
+.current-weather_weekday{
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    padding: 0.9rem 0;
+}
+
+.current-weather_description{
+    padding: 1rem 0;
+}
+
+.current-weather_description::first-letter{
+    text-transform: uppercase;
+}
+
+.current-weather_description::first-line{
+    font-weight: bold;
+}
+
+.hourly-weather{
+    position: relative;
+}
+
+.hourly-weather::after{
+    content: "";
+    background-color: #73b5ef;
+    background: linear-gradient(45deg, #c5d8e8,#73b5ef, #c5d8e8);
+    
+    width: 96%;    
+    height: 4px;
+    position: absolute;
+    bottom: -2px;
+    left:2%;
+    border-radius: 2px;
+}
+
+
+@media screen and (min-width: 768px){
+    html{
+        font-size: 150%;
+    }
+
+    li:nth-child(1n + 6){
+        display: initial;
+    }
+
+    li:not(:last-child){
+        border-right: solid 1px #AAA;
+    }
+}
+
+@media screen and (max-height: 700px){
+   .container{
+        height: auto;
+   }
+
+   .current-weather_lite img{
+        min-height: 8rem;
+    }
 }
