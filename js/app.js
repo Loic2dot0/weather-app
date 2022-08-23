@@ -76,14 +76,18 @@ function weatherApiCall(){
         });
 }
 
+const CURRENT_WEATHER = document.querySelector(".current-weather");
+
 function showCurrentWeather(data){
+    let hour = new Date().getHours();
     let today = new Date().toLocaleString("fr-FR",{year: 'numeric', month: 'long', day: 'numeric'});
     let weekday =  new Date().toLocaleString("fr-FR",{weekday: 'long'});
     let currentWeather = {
         temp: `${Math.round(data.temp)}°`,
         feelsLike: `${Math.round(data.feels_like)}°`,
         icon: data.weather[0].icon,
-        description: data.weather[0].description
+        description: data.weather[0].description,
+        id: data.weather[0].id
     }
 
     document.querySelector(".current-weather_lite img").setAttribute("src", `style/img/${currentWeather.icon}.svg`);
@@ -91,23 +95,40 @@ function showCurrentWeather(data){
     document.querySelector(".current-weather_weekday").textContent = weekday;
     document.querySelector(".current-weather_today").textContent = today;
     document.querySelector(".current-weather_description").innerHTML = `${currentWeather.description }<br>Température ressentie: ${currentWeather.feelsLike}`;
+
+    if(hour >= 21 || hour <= 7){
+        CURRENT_WEATHER.classList.add(".current-weather--night");
+    }
+    else{
+        CURRENT_WEATHER.classList.remove(".current-weather--night");
+
+        if(currentWeather.id == 800) CURRENT_WEATHER.style.background = 'linear-gradient(45deg, #73b5ef, #c5d8e8)';
+        
+        if(currentWeather.id > 800) CURRENT_WEATHER.style.background = 'linear-gradient(45deg, #c9c9c9, #f9f9f9)';
+
+        if(currentWeather.id < 800) CURRENT_WEATHER.style.background = 'linear-gradient(45deg, #8d8d8d, #f1f1f1)';
+    }
 }
 
 const HOURLY_WEATHER = document.querySelector(".hourly-weather");
 
 function handleHourlyWeather(data){
     for(let i = 0; i < 7; i++){
+        let hour = new Date(data[i].dt*1000).getHours();
         let li = document.createElement('li');
         li.innerHTML = `
-            ${new Date(data[i].dt*1000).getHours()}h<br>
+            ${hour}h<br>
             <img src="style/img/${data[i].weather[0].icon}.svg" ><br>
             ${Math.round(data[i].temp)}°`;
+        if(hour >= 21 || hour <= 7) {
+            li.classList.add("night");
+        }
         HOURLY_WEATHER.appendChild(li);
     }
 }
 
 const DAILY_WEATHER = document.querySelector(".daily-weather");
-const DAY_NAME = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+const DAY_NAME = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
 
 function handleDailyWeather(data){
     for(let i = 0; i < 7; i++){

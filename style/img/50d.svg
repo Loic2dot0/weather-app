@@ -569,12 +569,17 @@
     <g filter="url(#blur)" id="day">
         <g transform="translate(32,32)">
             <g class="am-weather-mist-1">
+              <line fill="none" stroke="#F1F1F1" x1="0" x2="10" stroke-linecap="round" stroke-width="2.4" transform="translate(-5,-10)" />
               <line fill="none" stroke="#c9c9c9" x1="0" x2="10" stroke-linecap="round" stroke-width="2" transform="translate(-5,-10)" />
+              <line fill="none" stroke="#F1F1F1" x1="0" x2="20" stroke-linecap="round" stroke-width="2.4" transform="translate(-5,0)" />
               <line fill="none" stroke="#c9c9c9" x1="0" x2="20" stroke-linecap="round" stroke-width="2" transform="translate(-5,0)" />
-              <line fill="none" stroke="#c9c9c9" x1="0" x2="20" stroke-linecap="round" stroke-width="2" transform="translate(-10,10)" />            
+              <line fill="none" stroke="#F1F1F1" x1="0" x2="20" stroke-linecap="round" stroke-width="2.4" transform="translate(-10,10)" />
+              <line fill="none" stroke="#c9c9c9" x1="0" x2="20" stroke-linecap="round" stroke-width="2" transform="translate(-10,10)" />                        
             </g>
             <g class="am-weather-mist-2">
+              <line fill="none" stroke="#F1F1F1" x1="0" x2="15" stroke-linecap="round" stroke-width="2.4" transform="translate(-10,-5)" />
               <line fill="none" stroke="#c9c9c9" x1="0" x2="15" stroke-linecap="round" stroke-width="2" transform="translate(-10,-5)" />
+              <line fill="none" stroke="#F1F1F1" x1="0" x2="20" stroke-linecap="round" stroke-width="2.4" transform="translate(-15,5)" />
               <line fill="none" stroke="#c9c9c9" x1="0" x2="20" stroke-linecap="round" stroke-width="2" transform="translate(-15,5)" />
             </g>
         </g>

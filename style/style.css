@@ -9,13 +9,11 @@ html{
 }
 
 body{
-    background-color: #333;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
     letter-spacing: 1px;
 }
 
 .container{
-    background: linear-gradient(45deg, #73b5ef, #c5d8e8);
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -36,8 +34,7 @@ h1 span{
 
 .loader{
     text-align: center;
-    font-size: 1.5rem;
-    
+    font-size: 1.5rem; 
 }
 
 ul{
@@ -70,6 +67,14 @@ li:nth-child(1n + 6){
     flex: 1;
     display: flex;
     flex-direction: column;
+    background: linear-gradient(45deg, #73b5ef, #c5d8e8);
+    text-shadow: 1px 1px 2px #fff;
+}
+
+.current-weather--night{
+    background: linear-gradient(0deg, #233255, #061638);
+    color: #fff;
+    text-shadow: 1px 1px 2px #000;    
 }
 
 .current-weather_lite{
@@ -88,7 +93,7 @@ li:nth-child(1n + 6){
 
 .current-weather_temp{
     font-size: 5rem;
-    font-weight: bold;    
+    font-weight: bold;
 }
 
 .current-weather_txt{
@@ -151,6 +156,11 @@ footer a{
 
 footer a:hover{
     text-decoration: underline;
+}
+
+.night{
+    background-color: #061638;
+    color: #fff;
 }
 
 @media screen and (min-width: 768px){
