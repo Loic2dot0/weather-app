@@ -58,7 +58,7 @@ li:nth-child(1n + 6){
     display: none;
 }
 
-.error-box{
+.error-box--active{
     position: absolute;
     top: 20vh;
     left:25vw;

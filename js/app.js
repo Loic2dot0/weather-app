@@ -23,6 +23,7 @@ if(navigator.geolocation){
 }
 else{
     ERROR_BOX.textContent = 'Votre navigateur ne prends pas en charge la géolocalisation.';
+    ERROR_BOX.classList.add('error-box--active');
 }
 
 function positionSuccess(pos){
@@ -34,6 +35,7 @@ function positionSuccess(pos){
 
 function positionError(err){
     LOADER.textContent = '';
+    ERROR_BOX.classList.add('error-box--active');
     switch(err.code){
         case 1:
             ERROR_BOX.textContent = "Vous n'avez pas autorisé la géolocalisation.";
@@ -67,12 +69,14 @@ function weatherApiCall(){
             else {
                 LOADER.textContent = '';
                 ERROR_BOX.textContent = `Oups... Erreur ${res.status}.`;
+                ERROR_BOX.classList.add('error-box--active');
             }
         })
         .catch(err => {
             console.log(err);
             LOADER.textContent = '';
             ERROR_BOX.textContent = "Oups... Une erreur est survenue";
+            ERROR_BOX.classList.add('error-box--active');
         });
 }
 
