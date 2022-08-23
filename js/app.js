@@ -18,13 +18,28 @@ const LOADER = document.querySelector(".loader");
 
 LOADER.textContent = 'Obtention de votre localisation en cours...';
 
-if(navigator.geolocation){
-    navigator.geolocation.getCurrentPosition(positionSuccess, positionError);
+getPosition();
+
+function getPosition(){
+    if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(positionSuccess, positionError);
+    }
+    else{
+        ERROR_BOX.textContent = 'Votre navigateur ne prends pas en charge la géolocalisation.';
+        ERROR_BOX.classList.add('error-box--active');
+    }
 }
-else{
-    ERROR_BOX.textContent = 'Votre navigateur ne prends pas en charge la géolocalisation.';
-    ERROR_BOX.classList.add('error-box--active');
-}
+
+const INTERVAL_ID = setInterval(()=>{
+    if(ERROR_BOX.textContent != ''){
+        clearInterval(INTERVAL_ID);
+    }
+    else{
+        HOURLY_WEATHER.innerHTML = "";
+        DAILY_WEATHER.innerHTML = "";
+        getPosition();
+    }
+}, 1000*60*5); // refresh delay 5min
 
 function positionSuccess(pos){
     LOADER.textContent = '';
