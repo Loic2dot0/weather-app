@@ -59,7 +59,17 @@ li:nth-child(1n + 6){
 }
 
 .error-box{
-    color: red;
+    position: absolute;
+    top: 20vh;
+    left:25vw;
+    width: 50vw;
+    padding: 20px;
+    color: #842029;
+    background-color: #f8d7da ;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 5px;
+    box-shadow: 2px 2px 3px rgba(132, 32, 41, 0.5);
 }
 
 .current-weather{
