@@ -13,6 +13,8 @@ const API_PARAM = {
     lon: 0 // default longitude
 }
 
+const REFRESH_DELAY = 1000*60*5; // refresh delay 5min
+
 const ERROR_BOX = document.querySelector(".error-box");
 const LOADER = document.querySelector(".loader");
 
@@ -39,7 +41,7 @@ const INTERVAL_ID = setInterval(()=>{
         DAILY_WEATHER.innerHTML = "";
         getPosition();
     }
-}, 1000*60*5); // refresh delay 5min
+}, REFRESH_DELAY); 
 
 function positionSuccess(pos){
     LOADER.textContent = '';
@@ -110,6 +112,7 @@ function showCurrentWeather(data){
     }
 
     document.querySelector(".current-weather_lite img").setAttribute("src", `style/img/${currentWeather.icon}.svg`);
+    document.querySelector(".current-weather_lite img").setAttribute("alt", `icone météo ${currentWeather.description}`);
     document.querySelector(".current-weather_temp").textContent = currentWeather.temp;
     document.querySelector(".current-weather_weekday").textContent = weekday;
     document.querySelector(".current-weather_today").textContent = today;
@@ -135,7 +138,7 @@ function handleHourlyWeather(data){
         let li = document.createElement('li');
         li.innerHTML = `
             ${hour}h<br>
-            <img src="style/img/${data[i].weather[0].icon}.svg" ><br>
+            <img src="style/img/${data[i].weather[0].icon}.svg" alt="icone météo ${data[i].weather[0].description}" title="${data[i].weather[0].description}"><br>
             ${Math.round(data[i].temp)}°`;
         if(hour >= 21 || hour <= 7) {
             li.classList.add("night");
@@ -153,7 +156,7 @@ function handleDailyWeather(data){
         let li = document.createElement('li');
         li.innerHTML = `
             ${day}<br>
-            <img src="style/img/${data[i].weather[0].icon}.svg" ><br>
+            <img src="style/img/${data[i].weather[0].icon}.svg" alt="icone météo ${data[i].weather[0].description}" title="${data[i].weather[0].description}"><br>
             ${Math.round(data[i].temp.day)}°`;
             DAILY_WEATHER.appendChild(li);
     }
