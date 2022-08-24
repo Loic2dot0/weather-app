@@ -1,6 +1,6 @@
 /*
     OpenWeather - https://openweathermap.org
-    API call : https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&lang={lang}&exclude={part}&appid={API key}
+    API call : https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&lang={lang}&units={units}&exclude={part}&appid=${API_key}
     API DOC : https://openweathermap.org/api/one-call-3
 */
 
@@ -116,15 +116,13 @@ function showCurrentWeather(data){
     document.querySelector(".current-weather_description").innerHTML = `${currentWeather.description }<br>Température ressentie: ${currentWeather.feelsLike}`;
 
     if(hour >= 21 || hour <= 7){
-        CURRENT_WEATHER.classList.add(".current-weather--night");
+        CURRENT_WEATHER.classList.add("current-weather--night");
     }
     else{
-        CURRENT_WEATHER.classList.remove(".current-weather--night");
+        CURRENT_WEATHER.classList.remove("current-weather--night");
 
-        if(currentWeather.id == 800) CURRENT_WEATHER.style.background = 'linear-gradient(45deg, #73b5ef, #c5d8e8)';
+        if(currentWeather.id >= 800) CURRENT_WEATHER.style.background = 'linear-gradient(45deg, #73b5ef, #c5d8e8)';
         
-        if(currentWeather.id > 800) CURRENT_WEATHER.style.background = 'linear-gradient(45deg, #c9c9c9, #f9f9f9)';
-
         if(currentWeather.id < 800) CURRENT_WEATHER.style.background = 'linear-gradient(45deg, #8d8d8d, #f1f1f1)';
     }
 }
