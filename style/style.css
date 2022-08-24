@@ -98,7 +98,7 @@ li:nth-child(1n + 6){
     object-fit: contain;
     height: 100%;
     max-width: 50%;
-    scale: 1.4;
+    transform: scale(1.4);
 }
 
 .current-weather_temp{
@@ -192,7 +192,7 @@ footer a:hover{
         object-fit: contain;
         height: 100%;
         max-width: 50%;
-        scale: 1.4;
+        transform: scale(1.8);
     }
      
     .current-weather_temp{
@@ -206,6 +206,10 @@ footer a:hover{
 
     li:not(:last-child){
         border-right: solid 1px #AAA;
+    }
+
+    li img{
+        transform: scale(1.4);
     }
 }
 
@@ -225,11 +229,27 @@ footer a:hover{
     html{
         font-size: 200%;
     }
+
+    li{
+        line-height: 2rem;
+    }
+
+    li img{
+        transform: scale(2);
+    }
 }
 
 @media screen and (min-width: 3840px){
     html{
         font-size: 300%;
+    }
+
+    li{
+        line-height: 2.5rem;
+    }
+
+    li img{
+        transform: scale(3);
     }
 }
 
