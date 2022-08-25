@@ -37,8 +37,6 @@ const INTERVAL_ID = setInterval(()=>{
         clearInterval(INTERVAL_ID);
     }
     else{
-        HOURLY_WEATHER.innerHTML = "";
-        DAILY_WEATHER.innerHTML = "";
         getPosition();
     }
 }, REFRESH_DELAY); 
@@ -119,20 +117,20 @@ function showCurrentWeather(data){
     document.querySelector(".current-weather_description").innerHTML = `${currentWeather.description }<br>Température ressentie: ${currentWeather.feelsLike}`;
 
     if(hour >= 21 || hour <= 7){
+        CURRENT_WEATHER.classList.remove("current-weather--rain");
         CURRENT_WEATHER.classList.add("current-weather--night");
     }
     else{
-        CURRENT_WEATHER.classList.remove("current-weather--night");
+        CURRENT_WEATHER.classList.remove("current-weather--night", "current-weather--rain");
 
-        if(currentWeather.id >= 800) CURRENT_WEATHER.style.background = 'linear-gradient(45deg, #73b5ef, #c5d8e8)';
-        
-        if(currentWeather.id < 800) CURRENT_WEATHER.style.background = 'linear-gradient(45deg, #8d8d8d, #f1f1f1)';
+        if(currentWeather.id < 800) CURRENT_WEATHER.classList.add("current-weather--rain");
     }
 }
 
 const HOURLY_WEATHER = document.querySelector(".hourly-weather");
 
 function handleHourlyWeather(data){
+    HOURLY_WEATHER.innerHTML = "";
     for(let i = 0; i < 7; i++){
         let hour = new Date(data[i].dt*1000).getHours();
         let li = document.createElement('li');
@@ -151,6 +149,7 @@ const DAILY_WEATHER = document.querySelector(".daily-weather");
 const DAY_NAME = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
 
 function handleDailyWeather(data){
+    DAILY_WEATHER.innerHTML = "";
     for(let i = 0; i < 7; i++){
         let day = DAY_NAME[new Date(data[i].dt*1000).getDay()];
         let li = document.createElement('li');
